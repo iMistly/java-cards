@@ -1,57 +1,64 @@
 package cardgames;
+import java.util.Vector;
+import java.util.Random;
 
 // Removing 'public' makes the Deck class package-private
 class Deck {
-    Card[] cards = new Card[52];
-    int topCard = 0; // Index of the top card in the deck
+    Vector<Card> cards = new Vector<>(52);
     
     // Constructor to initialize the deck with 52 cards
     public Deck(){
-        int index = 0;
+        this.initializeDeck();
+    }
+
+    public void initializeDeck() {
+        cards.clear();
         for (String suit : Card.VALID_SUITS) {
             for (String rank : Card.VALID_RANKS) {
-                cards[index++] = new Card(rank, suit);
+                cards.add(new Card(rank, suit));
             }
         }
     }
 
-    public void show_deck(){
-        for (int i = 0; i < cards.length; i++) {
-            System.out.print(cards[i].rank + cards[i].suit + " ");
+    public void showDeck(){
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.print(cards.get(i).rank + cards.get(i).suit + " ");
         }
+        System.out.println();
     }
 
     // Cards are shuffled at random
     public void shuffle() { 
         Random rand = new Random();
-        for (int i = cards.length - 1; i > 0; i--) {
+        for (int i = cards.size() - 1; i > 0; i--) {
             int j = rand.nextInt(i + 1);
 
-            Card temp = cards[i];
-            card[i] = cards[j];
-            cards[j] = temp;
+            Card temp = cards.get(i);
+            cards.set(i, cards.get(j));
+            cards.set(j, temp);
         }
-        topCard = 0;
         System.out.println("Deck is shuffled.");
     }
 
     // Cards are dealt from the top of deck
     // if deck is empty return card
-    public Card dealC() {
-        if (topCard >= cards.length) {
+    public Card dealCard() {
+        if (this.isEmpty()) {
             return null;
         }
-        return cards[topCard++];
+        Card card_to_deal = cards.get(0);
+        cards.remove(0);
+        return card_to_deal;
     }
 
     // checks if deck is empty
     // returns true if empty
     public boolean isEmpty() {
-        return topCard >= cards.length;
+        return cards.isEmpty();
     }
 
     // returns num of cards left in deck
-    public int remaningC() {
-        return cards.length - topCard;
+    public int remainingCards() {
+        return cards.size();
     }
 }

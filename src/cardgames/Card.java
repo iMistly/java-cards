@@ -34,4 +34,8 @@ class Card {
         }
         return false;
     }
+
+    public String getValue() {
+        return this.rank + this.suit;
+    }
 }
