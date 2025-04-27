@@ -21,6 +21,7 @@ class Deck {
         }
     }
 
+    // Cards are shuffled at random
     public void shuffle() { 
         Random rand = new Random();
         for (int i = cards.length - 1; i > 0; i--) {
@@ -34,5 +35,23 @@ class Deck {
         System.out.println("Deck is shuffled.");
     }
 
-    
+    // Cards are dealt from the top of deck
+    // if deck is empty return card
+    public Card dealC() {
+        if (topCard >= cards.length) {
+            return null;
+        }
+        return cards[topCard++];
+    }
+
+    // checks if deck is empty
+    // returns true if empty
+    public boolean isEmpty() {
+        return topCard >= cards.length;
+    }
+
+    // returns num of cards left in deck
+    public int remaningC() {
+        return cards.length - topCard;
+    }
 }
