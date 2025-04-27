@@ -1,32 +1,25 @@
 package cardgames;
+import java.util.Vector;
 
-public class Hand {
-    private Card[] cards;
-    private int cardCount;
-
-    private static final int MAX_HAND_SIZE = 11;
+class Hand {
+    public Vector<Card> cards;
 
     public Hand() {
-        this.cards = new Card[MAX_HAND_SIZE];
-        this.cardCount = 0;
+        this.cards = new Vector<>();
     }
 
     public void addCard(Card card) {
-        if (cardCound < cards.length) {
-            this.cards[carCound] = card;
-            cardCount++;
-        } else {
-            System.out.println("Hand is full. Cant add more cards!");
-        }
+        this.cards.add(card);
     }
 
     public void clear() {
-        this.cards = new Card[MAX_HAND_SIZE];
-        this.cardCount = 0;
+        this.cards.clear();
     }
 
-    public int getVal() {
-        int value = o;
-        int aceCount = 0;
+    public void showHand() {
+        for (Card card : cards) {
+            System.out.print(card.getValue() + " ");
+        }
+        System.out.println();
     }
 }
