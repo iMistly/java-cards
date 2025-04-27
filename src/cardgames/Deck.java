@@ -20,4 +20,19 @@ class Deck {
             System.out.print(cards[i].rank + cards[i].suit + " ");
         }
     }
+
+    public void shuffle() { 
+        Random rand = new Random();
+        for (int i = cards.length - 1; i > 0; i--) {
+            int j = rand.nextInt(i + 1);
+
+            Card temp = cards[i];
+            card[i] = cards[j];
+            cards[j] = temp;
+        }
+        topCard = 0;
+        System.out.println("Deck is shuffled.");
+    }
+
+    
 }
