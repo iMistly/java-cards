@@ -36,7 +36,6 @@ public class Deck {
             cards.set(i, cards.get(j));
             cards.set(j, temp);
         }
-        System.out.println("Deck is shuffled.");
     }
 
     // Cards are dealt from the top of deck
