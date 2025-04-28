@@ -71,4 +71,31 @@ class BlackJackHand extends Hand{
 
         return value;
     }
+
+    // method to get total hand value and dealers hidden card
+    public int getFullHandVal() {
+        int value = 0;
+        int aceCount = 0;
+
+        for (Card card : cards) {
+            String rank = card.rank;
+            if(rank.equals("A")) {
+                value += 11;
+                aceCount++;
+            }
+            else if(rank.equals("k") || rank.equals("Q") || rank.equals("J")) {
+                value += 10;
+            } else {
+                value += Integer.parseInt(rank);
+            }
+        }
+
+        // Adjust if we go over 21
+        while (value > 21 && aceCount > 0) {
+            value -= 10;
+            aceCount--;
+        }
+
+        return value;
+    }
 }

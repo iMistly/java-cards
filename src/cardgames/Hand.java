@@ -21,5 +21,6 @@ class Hand {
             System.out.print(card.getValue() + " ");
         }
         System.out.println();
-    }
+    } 
 }
+
