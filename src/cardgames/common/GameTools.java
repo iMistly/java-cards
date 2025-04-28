@@ -1,6 +1,6 @@
 package cardgames.common;
 
-public class GameTools {
+public final class GameTools {
     // Method to wait for a specified number of milliseconds
     // Doesn't work without try catch
     public static void wait(int milliseconds) {

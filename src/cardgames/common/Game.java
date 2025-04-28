@@ -1,8 +1,8 @@
 package cardgames.common;
 
 public abstract class Game {
-    public Deck deck;
-    public boolean gameActive;
+    protected Deck deck;
+    protected boolean gameActive;
 
     // We have to pass the scanner around to avoid errors
     public Game() {

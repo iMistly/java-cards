@@ -1,12 +1,10 @@
 package cardgames.blackjack;
 import cardgames.common.Game;
 import cardgames.common.GameTools;
-import cardgames.common.Deck;
 import java.util.Scanner;
 
 public class BlackJack extends Game {
     // Necessary parts of the game
-    private Deck deck;
     private BlackJackHand playerHand;
     private BlackJackHand dealerHand;
     
