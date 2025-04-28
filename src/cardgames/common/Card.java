@@ -1,11 +1,11 @@
-package cardgames;
-// Removing 'public' makes the Deck class package-private
-class Card {
+package cardgames.common;
+
+public class Card {
     public static final String[] VALID_RANKS = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     public static final String[] VALID_SUITS = {"C", "H", "S", "D"};
 
-    String rank; // (A)ce, 2, 3, 4, 5, 6, 7, 8, 9, 10, (J)ack, (Q)ueen, (K)ing
-    String suit; // (C)lubs, (H)earts, (S)pades, (D)iamonds
+    public String rank; // (A)ce, 2, 3, 4, 5, 6, 7, 8, 9, 10, (J)ack, (Q)ueen, (K)ing
+    public String suit; // (C)lubs, (H)earts, (S)pades, (D)iamonds
 
     // Ensure that the requested card is valid
     public Card(String rank, String suit){

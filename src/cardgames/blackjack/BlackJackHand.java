@@ -1,4 +1,6 @@
-package cardgames;
+package cardgames.blackjack;
+import cardgames.common.Hand;
+import cardgames.common.Card;
 
 class BlackJackHand extends Hand{
     public int MAX_HAND_SIZE = 11;

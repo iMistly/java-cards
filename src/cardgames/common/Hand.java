@@ -1,7 +1,7 @@
-package cardgames;
+package cardgames.common;
 import java.util.Vector;
 
-class Hand {
+public class Hand {
     public Vector<Card> cards;
 
     public Hand() {

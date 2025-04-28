@@ -1,9 +1,8 @@
-package cardgames;
+package cardgames.common;
 import java.util.Vector;
 import java.util.Random;
 
-// Removing 'public' makes the Deck class package-private
-class Deck {
+public class Deck {
     Vector<Card> cards = new Vector<>(52);
     
     // Constructor to initialize the deck with 52 cards

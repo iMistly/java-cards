@@ -1,4 +1,4 @@
-import cardgames.*;
+import cardgames.blackjack.BlackJack;
 
 // For testing and/or initiating a card game.
 public class Main{

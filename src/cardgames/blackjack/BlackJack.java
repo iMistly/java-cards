@@ -1,4 +1,5 @@
-package cardgames;
+package cardgames.blackjack;
+import cardgames.common.Deck;
 
 public class BlackJack {
     // Necessary parts of the game
