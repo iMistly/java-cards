@@ -1,25 +1,26 @@
 package cardgames.blackjack;
+import cardgames.common.Game;
 import cardgames.common.GameTools;
 import cardgames.common.Deck;
 import java.util.Scanner;
 
-public class BlackJack {
+public class BlackJack extends Game {
     // Necessary parts of the game
     private Deck deck;
+    private Scanner scanner;
     private BlackJackHand playerHand;
     private BlackJackHand dealerHand;
     
     // Game variables
     boolean playerTurn;
-    boolean gameActive;
     
     private static final int BLACKJACK = 21;
     // Officially, the dealer must stand on 17 or higher
     private static final int DEALER_STAND = 17;
 
     // Initialize the game
-    public BlackJack(){
-        this.deck = new Deck();
+    public BlackJack(Scanner scanner){
+        super(scanner); // Explicitly call the parent class constructor
         this.playerHand = new BlackJackHand();
         this.dealerHand = new BlackJackHand(true);
     }
@@ -29,15 +30,15 @@ public class BlackJack {
         GameTools.clearConsole();
         System.out.print("Starting a new game of BlackJack");
         GameTools.wait(2000, true);
-        this.deck.initializeDeck();
+        super.deck.initializeDeck();
         System.out.print("Shuffling the deck");
         GameTools.wait(2000, true);
-        this.deck.shuffle();
+        super.deck.shuffle();
         this.playerHand.clear();
         this.dealerHand.clear();
         this.dealInitialCards();
         this.playerTurn = true;
-        this.gameActive = true;
+        super.gameActive = true;
         this.play();
     }
 
@@ -46,8 +47,8 @@ public class BlackJack {
         GameTools.wait(2000, true);
         // Deal two cards to the player and dealer
         for (int i = 0; i < 2; i++) {
-            this.playerHand.addCard(this.deck.dealCard());
-            this.dealerHand.addCard(this.deck.dealCard());
+            this.playerHand.addCard(super.deck.dealCard());
+            this.dealerHand.addCard(super.deck.dealCard());
         }
         GameTools.wait(1000);
         // Check for blackjack
@@ -85,19 +86,17 @@ public class BlackJack {
     public void play() {
         GameTools.clearConsole();
 
-        Scanner scanner = new Scanner(System.in);
-
         while(gameActive){
             
             if(playerTurn){
                 this.showHands();
                 System.out.println("Player's turn. Choose an action: (h)it, (s)tand");
                 
-                String action = scanner.nextLine(); // Get user input
+                String action = super.scanner.nextLine(); // Get user input
                 // Small delay to simulate thinking time
                 GameTools.wait(200);
                 if(action.equals("h")){
-                    this.playerHand.addCard(this.deck.dealCard());
+                    this.playerHand.addCard(super.deck.dealCard());
                     this.showHands();
                     if(this.playerHand.getHandValue() > BLACKJACK){
                         System.out.print("\033[H\033[2J");
@@ -118,7 +117,6 @@ public class BlackJack {
                 dealerTurn();
             }
         }
-        scanner.close();
     }
 
     private void dealerTurn() {
@@ -127,7 +125,7 @@ public class BlackJack {
             System.out.print("Dealer's turn. Must hit until reaching " + DEALER_STAND);
             // Wait for a moment before dealer's turn
             GameTools.wait(1500, true);
-            this.dealerHand.addCard(this.deck.dealCard());
+            this.dealerHand.addCard(super.deck.dealCard());
             this.showHands();
             // Give the player a moment to see the dealer's hand
             GameTools.wait(1000);
@@ -155,15 +153,10 @@ public class BlackJack {
         GameTools.wait(1000);
         System.out.println("Final Hands:");
         this.showHands(true);
-        gameActive = false;
+        super.gameActive = false;
+        System.out.print("Ending game");
+        GameTools.wait(2000, true);
     }
 
-    public void endGame() {
-        System.out.println("Game over.");
-        this.gameActive = false;
-    }
-
-    public boolean isGameActive() {
-        return gameActive;
-    }
+    
 }
