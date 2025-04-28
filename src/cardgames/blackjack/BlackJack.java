@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class BlackJack extends Game {
     // Necessary parts of the game
     private Deck deck;
-    private Scanner scanner;
     private BlackJackHand playerHand;
     private BlackJackHand dealerHand;
     
@@ -19,13 +18,14 @@ public class BlackJack extends Game {
     private static final int DEALER_STAND = 17;
 
     // Initialize the game
-    public BlackJack(Scanner scanner){
-        super(scanner); // Explicitly call the parent class constructor
+    public BlackJack(){
+        super();
         this.playerHand = new BlackJackHand();
         this.dealerHand = new BlackJackHand(true);
     }
 
     // Start a new game
+    @Override
     public void newGame() {
         GameTools.clearConsole();
         System.out.print("Starting a new game of BlackJack");
@@ -83,8 +83,10 @@ public class BlackJack extends Game {
         this.dealerHand.showHand(showAll);
     }
 
+    @Override
     public void play() {
         GameTools.clearConsole();
+        Scanner scanner = new Scanner(System.in);
 
         while(gameActive){
             
@@ -92,7 +94,7 @@ public class BlackJack extends Game {
                 this.showHands();
                 System.out.println("Player's turn. Choose an action: (h)it, (s)tand");
                 
-                String action = super.scanner.nextLine(); // Get user input
+                String action = scanner.nextLine(); // Get user input
                 // Small delay to simulate thinking time
                 GameTools.wait(200);
                 if(action.equals("h")){
@@ -117,6 +119,8 @@ public class BlackJack extends Game {
                 dealerTurn();
             }
         }
+        // Typically we'd close the scanner here, but we want to keep it open for the next game
+        // scanner.close();
     }
 
     private void dealerTurn() {

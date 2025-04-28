@@ -43,7 +43,7 @@ public class Main{
                 break;
             }
             else if (choice == 1) {
-                game = new BlackJack(scanner);
+                game = new BlackJack();
             }
             else{
                 System.out.print("Invalid choice. Please try again");
