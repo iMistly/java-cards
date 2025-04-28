@@ -43,6 +43,15 @@ class BlackJackHand extends Hand{
         }
     }
 
+    public void showHand(boolean showAll) {
+        if(showAll){
+            super.showHand();
+        }
+        else{
+            this.showHand();
+        }
+    }
+
     public int getHandValue() {
         int value = 0;
         int aceCount = 0;
