@@ -71,5 +71,6 @@ class BlackJackHand extends Hand{
 
         return value;
     }
+}
 
 //
