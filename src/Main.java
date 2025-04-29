@@ -7,6 +7,7 @@ import java.util.Map;
 import cardgames.common.GameTools;
 import cardgames.blackjack.BlackJack;
 import cardgames.common.Game;
+import cardgames.highcard.HighCard;
 
 // For testing and/or initiating a card game.
 public class Main{
@@ -16,6 +17,7 @@ public class Main{
         Map<Integer, String> options = new HashMap<>();
         options.put(0, "Exit");
         options.put(1, "BlackJack");
+        options.put(2, "HighCard");
 
         Game game;
 
@@ -41,11 +43,11 @@ public class Main{
             if (choice == 0) {
                 System.out.println("Exiting the game. Goodbye!");
                 break;
-            }
-            else if (choice == 1) {
+            } else if (choice == 1) {
                 game = new BlackJack();
-            }
-            else{
+            } else if (choice == 2) { // Add condition for HighCard
+                game = new HighCard();
+            } else{
                 System.out.print("Invalid choice. Please try again");
                 GameTools.wait(1000, true);
                 continue;
