@@ -23,6 +23,7 @@ public class Main{
 
         while(true){
             GameTools.clearConsole();
+            printCardGraphic();
             System.out.println("Welcome to our Card Game Suite!");
             System.out.println("Please select a number from the following games:");
             System.out.println("================================================");
@@ -58,5 +59,14 @@ public class Main{
             choice = -1; 
         }
         scanner.close();
+    }
+    public static void printCardGraphic() {
+        System.out.println(" _____     _____     _____");
+        System.out.println(" |A♠  |   |K♥  |   |Q♦  |");
+        System.out.println(" | ♠  |   | ♥  |   | ♦  |");
+        System.out.println(" |    |   |    |   |    |");
+        System.out.println(" |  ♠ |   |  ♥ |   |  ♦ |");
+        System.out.println(" |____|   |____|   |____|");
+        System.out.println();
     }
 }
