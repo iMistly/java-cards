@@ -16,12 +16,6 @@ public class HighCard extends Game {
         this.scanner = new Scanner(System.in);
     }
 
-    // Method to start the game
-    public static void main(String[] args) {
-        HighCard game = new HighCard();
-        game.newGame();
-    }
-
     // Start a new game
     @Override
     public void newGame() {
@@ -60,9 +54,11 @@ public class HighCard extends Game {
             Card dealerCard = deck.dealCard();
 
             // Displays cards drawn
-            System.out.println("You drew: " + playerCard.getValue());
+            System.out.println("You drew:");
+            GameTools.printCardSequence(new Object[] {playerCard});
             GameTools.wait(2000, true); 
-            System.out.println("Dealer drew: " + dealerCard.getValue());
+            System.out.println("Dealer drew:");
+            GameTools.printCardSequence(new Object[] {dealerCard});
             GameTools.wait(2000);
 
             // Winner is determined
@@ -104,8 +100,8 @@ public class HighCard extends Game {
     // Method to compare cards based on rank
     // Returns positive if card1 > card2, negative if card1 < card2, 0 if equal
     private int compareCards(Card card1, Card card2) {
-        int rank1Value = getRankValue(card1.rank);
-        int rank2Value = getRankValue(card2.rank);
+        int rank1Value = getRankValue(card1.getRank());
+        int rank2Value = getRankValue(card2.getRank());
 
         return Integer.compare(rank1Value, rank2Value);
     }

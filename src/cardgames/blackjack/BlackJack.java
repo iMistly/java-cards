@@ -19,7 +19,7 @@ public class BlackJack extends Game {
     public BlackJack(){
         super();
         this.playerHand = new BlackJackHand();
-        this.dealerHand = new BlackJackHand(true);
+        this.dealerHand = new BlackJackHand();
     }
 
     // Start a new game
@@ -35,8 +35,8 @@ public class BlackJack extends Game {
         this.playerHand.clear();
         this.dealerHand.clear();
         this.dealInitialCards();
-        this.playerTurn = true;
         super.gameActive = true;
+        this.playerTurn = true;
         this.play();
     }
 
@@ -52,19 +52,21 @@ public class BlackJack extends Game {
         // Check for blackjack
         if (this.playerHand.getHandValue() == BLACKJACK && this.dealerHand.getHandValue() == BLACKJACK) {
             System.out.println("Both player and dealer have blackjack! That's crazy! It's a tie!");
-            this.showHands(true);
+            this.showHands();
             gameActive = false;
         } 
         else if (this.playerHand.getHandValue() == BLACKJACK) {
             System.out.println("Player has a blackjack! That's amazing! Player wins!");
-            this.showHands(true);
+            this.showHands();
             gameActive = false;
         } 
         else if (this.dealerHand.getHandValue() == BLACKJACK) {
             System.out.println("Dealer has a blackjack! Sucks to be you! Dealer wins!");
-            this.showHands(true);
+            this.showHands();
             gameActive = false;
         }
+        // Hide dealer's first card
+        this.dealerHand.flipCard(0);
     }
 
     private void showHands() {
@@ -74,20 +76,12 @@ public class BlackJack extends Game {
         this.dealerHand.showHand();
     }
 
-    private void showHands(boolean showAll) {
-        System.out.printf("Player's Hand: == %d\n", this.playerHand.getHandValue());
-        this.playerHand.showHand();
-        System.out.printf("Dealer's Hand: == %d\n", this.dealerHand.getHandValue());
-        this.dealerHand.showHand(showAll);
-    }
-
     @Override
     public void play() {
         GameTools.clearConsole();
         Scanner scanner = new Scanner(System.in);
 
         while(gameActive){
-            
             if(playerTurn){
                 this.showHands();
                 System.out.println("Player's turn. Choose an action: (h)it, (s)tand");
@@ -102,7 +96,7 @@ public class BlackJack extends Game {
                         System.out.print("\033[H\033[2J");
                         System.out.flush();
                         System.out.println("Player busts! Dealer wins.");
-                        this.showHands(true);
+                        this.showHands();
                         GameTools.wait(4000);
                         gameActive = false;
                     }
@@ -154,11 +148,10 @@ public class BlackJack extends Game {
         }
         GameTools.wait(1000);
         System.out.println("Final Hands:");
-        this.showHands(true);
+        this.dealerHand.flipCard(0);
+        this.showHands();
         super.gameActive = false;
         System.out.print("Ending game");
         GameTools.wait(2000, true);
     }
-
-    
 }

@@ -4,15 +4,9 @@ import cardgames.common.Card;
 
 class BlackJackHand extends Hand{
     public int MAX_HAND_SIZE = 11;
-    private boolean isDealer;
 
     public BlackJackHand() {
         super();
-        this.isDealer = false;
-    }
-    public BlackJackHand(boolean isDealer){
-        super();
-        this.isDealer = isDealer;
     }
     
     @Override
@@ -25,43 +19,13 @@ class BlackJackHand extends Hand{
         }
     }
 
-    @Override
-    public void showHand() {
-        if(isDealer){
-            for(int i = 0; i < cards.size(); i++){
-                if (i == 0){
-                    System.out.print("[Hidden] ");
-                }
-                else{
-                    System.out.print(cards.get(i).getValue() + " ");
-                }
-            }
-            System.out.println();
-        }
-        else{
-            super.showHand();
-        }
-    }
-
-    public void showHand(boolean showAll) {
-        if(showAll){
-            super.showHand();
-        }
-        else{
-            this.showHand();
-        }
-    }
-
     public int getHandValue() {
         int value = 0;
         int aceCount = 0;
 
         for(Card card : cards) {
-            // Skip the hidden card for the dealer
-            if(isDealer && cards.indexOf(card) == 0) {
-                continue; // Skip the first card for the dealer
-            }
-            String rank = card.rank;
+            if(card.isFaceDown()){continue;}
+            String rank = card.getRank();
             if(rank.equals("A")) {
                 value += 11; // Ace is worth 11 points
                 aceCount++;

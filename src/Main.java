@@ -1,17 +1,28 @@
+
 // Typical Java imports
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
-// Card game imports
+// Additional card tools
 import cardgames.common.GameTools;
+import cardgames.common.Card;
+
+// Card game imports
 import cardgames.blackjack.BlackJack;
 import cardgames.common.Game;
 import cardgames.highcard.HighCard;
 
 // For testing and/or initiating a card game.
-public class Main{
-    public static void main(String[] args){
+public class Main {
+    final static Object[] splashScreen = new Object[] {
+        new Card("A", "S"), 
+        new Card("K", "H"), 
+        new Card("Q", "D"),
+        new Card("J", "C")
+    };
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
         Map<Integer, String> options = new HashMap<>();
@@ -21,9 +32,27 @@ public class Main{
 
         Game game;
 
-        while(true){
+        // ASCII config
+        GameTools.clearConsole();
+        System.out.println("Before we begin.");
+        while (true) {
+            System.out.println("Can you see these symbols? (y/n) -> ♣♥♠♦");
+            String input = scanner.next().toLowerCase();
+            if(input.equals("y")){
+                GameTools.display_type = GameTools.DISPLAY_TYPES[1];
+                break;
+            }
+            else if (input.equals("n")){
+                GameTools.display_type = GameTools.DISPLAY_TYPES[0];
+                break;
+            }
+            System.out.println("Invalid input!");
+        }
+
+        // Main game loop
+        while (true) {
             GameTools.clearConsole();
-            printCardGraphic();
+            GameTools.printCardSequence(splashScreen);
             System.out.println("Welcome to our Card Game Suite!");
             System.out.println("Please select a number from the following games:");
             System.out.println("================================================");
@@ -46,9 +75,9 @@ public class Main{
                 break;
             } else if (choice == 1) {
                 game = new BlackJack();
-            } else if (choice == 2) { // Add condition for HighCard
+            } else if (choice == 2) {
                 game = new HighCard();
-            } else{
+            } else {
                 System.out.print("Invalid choice. Please try again");
                 GameTools.wait(1000, true);
                 continue;
@@ -56,17 +85,8 @@ public class Main{
             // Start the game
             game.newGame();
             // Reset choice to prompt again
-            choice = -1; 
+            choice = -1;
         }
         scanner.close();
-    }
-    public static void printCardGraphic() {
-        System.out.println(" _____     _____     _____");
-        System.out.println(" |A♠  |   |K♥  |   |Q♦  |");
-        System.out.println(" | ♠  |   | ♥  |   | ♦  |");
-        System.out.println(" |    |   |    |   |    |");
-        System.out.println(" |  ♠ |   |  ♥ |   |  ♦ |");
-        System.out.println(" |____|   |____|   |____|");
-        System.out.println();
     }
 }
