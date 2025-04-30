@@ -15,14 +15,16 @@ public final class GameTools {
     }
 
     // Evenly space out the dots over the specified time
+    // wait "." wait "." wait "." wait
     public static void wait(int milliseconds, boolean animateDots) {
         int num_dots = 3;
-        int interval = milliseconds / num_dots;
+        int interval = milliseconds / (num_dots+1);
         if (animateDots){
             for (int i = 0; i < num_dots; i++) {
                 wait(interval);
                 System.out.print(".");
             }
+            wait(interval);
             System.out.println();
         }
         else{

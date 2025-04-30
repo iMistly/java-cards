@@ -54,24 +54,24 @@ public class BlackJack extends Game {
         if (this.playerHand.getHandValue() == BLACKJACK && this.dealerHand.getHandValue() == BLACKJACK) {
             GameTools.clearConsole();
             gameActive = false;
-            this.showHands();
             System.out.println("Both player and dealer have blackjack! What are the odds?!");
+            this.showHands();
             GameTools.wait(4000, true);
             determineWinner();
         } 
         else if (this.playerHand.getHandValue() == BLACKJACK) {
             GameTools.clearConsole();
             gameActive = false;
-            this.showHands();
             System.out.println("Player has a blackjack! That's amazing!");
+            this.showHands();
             GameTools.wait(4000, true);
             determineWinner();
         } 
         else if (this.dealerHand.getHandValue() == BLACKJACK) {
             GameTools.clearConsole();
             gameActive = false;
-            this.showHands();
             System.out.println("Dealer has a blackjack! Sucks to be you!");
+            this.showHands();
             GameTools.wait(4000, true);
             determineWinner();
         }
@@ -103,12 +103,7 @@ public class BlackJack extends Game {
                     this.playerHand.addCard(super.deck.dealCard());
                     this.showHands();
                     if(this.playerHand.getHandValue() > BLACKJACK){
-                        System.out.print("\033[H\033[2J");
-                        System.out.flush();
-                        System.out.println("Player busts! Dealer wins.");
-                        this.showHands();
-                        GameTools.wait(4000);
-                        gameActive = false;
+                        this.determineWinner();
                     }
                 }
                 else if(action.equals("s")){
@@ -125,10 +120,12 @@ public class BlackJack extends Game {
 
     private void dealerTurn() {
         this.dealerHand.flipCard(0);
+        GameTools.clearConsole();
+        System.out.print("Dealer's turn. Must hit until reaching " + DEALER_STAND);
+        GameTools.wait(2000, true);
         while(this.dealerHand.getHandValue() < DEALER_STAND){
             GameTools.clearConsole();
             System.out.println("Dealer's turn. Must hit until reaching " + DEALER_STAND);
-            // Wait for a moment before dealer's turn
             this.dealerHand.addCard(super.deck.dealCard());
             this.showHands();
             // Give the player a moment to see the dealer's hand
@@ -144,6 +141,9 @@ public class BlackJack extends Game {
 
         if(dealerValue > BLACKJACK){
             System.out.println("Dealer busts! Player wins.");
+        }
+        else if(playerValue > BLACKJACK){
+            System.out.println("Player busts! Dealer wins.");
         }
         else if(playerValue > dealerValue){
             System.out.println("Player wins!");

@@ -16,8 +16,8 @@ import cardgames.highcard.HighCard;
 // For testing and/or initiating a card game.
 public class Main {
     final static Object[] splashScreen = new Object[] {
-        new Card("A", "S"), 
-        new Card("K", "H"), 
+        new Card("A", "S"),
+        new Card("K", "H"),
         new Card("Q", "D"),
         new Card("J", "C")
     };
@@ -52,8 +52,8 @@ public class Main {
         // Main game loop
         while (true) {
             GameTools.clearConsole();
-            GameTools.printCardSequence(splashScreen);
             System.out.println("Welcome to our Card Game Suite!");
+            GameTools.printCardSequence(splashScreen);
             System.out.println("Please select a number from the following games:");
             System.out.println("================================================");
             for (Map.Entry<Integer, String> entry : options.entrySet()) {
