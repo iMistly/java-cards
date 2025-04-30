@@ -19,13 +19,6 @@ public class Deck {
         }
     }
 
-    public void showDeck(){
-        for (int i = 0; i < cards.size(); i++) {
-            System.out.print(cards.get(i).rank + cards.get(i).suit + " ");
-        }
-        System.out.println();
-    }
-
     // Cards are shuffled at random
     public void shuffle() { 
         Random rand = new Random();
