@@ -19,7 +19,7 @@ public class BlackJack extends Game {
     public BlackJack(){
         super();
         this.playerHand = new BlackJackHand();
-        this.dealerHand = new BlackJackHand(true);
+        this.dealerHand = new BlackJackHand();
     }
 
     // Start a new game
@@ -71,14 +71,14 @@ public class BlackJack extends Game {
         System.out.printf("Player's Hand: == %d\n", this.playerHand.getHandValue());
         this.playerHand.showHand();
         System.out.printf("Dealer's Hand: >= %d\n", this.dealerHand.getHandValue());
-        this.dealerHand.showHand();
+        this.dealerHand.showHand(true);
     }
 
     private void showHands(boolean showAll) {
         System.out.printf("Player's Hand: == %d\n", this.playerHand.getHandValue());
         this.playerHand.showHand();
         System.out.printf("Dealer's Hand: == %d\n", this.dealerHand.getHandValue());
-        this.dealerHand.showHand(showAll);
+        this.dealerHand.showHand();
     }
 
     @Override

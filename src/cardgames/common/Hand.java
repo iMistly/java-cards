@@ -17,10 +17,10 @@ public class Hand {
     }
 
     public void showHand() {
-        for (Card card : cards) {
-            System.out.print(card.getValue() + " ");
+        for (Card card : this.cards) {
+            GameTools.printCard(card);
+            System.out.print(" ");
         }
         System.out.println();
-    } 
+    }
 }
-

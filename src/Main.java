@@ -12,6 +12,7 @@ import cardgames.highcard.HighCard;
 // For testing and/or initiating a card game.
 public class Main{
     public static void main(String[] args){
+        GameTools.display_type = GameTools.DISPLAY_TYPES[1];
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
         Map<Integer, String> options = new HashMap<>();
