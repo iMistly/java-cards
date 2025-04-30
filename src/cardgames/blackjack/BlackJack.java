@@ -7,7 +7,8 @@ public class BlackJack extends Game {
     // Necessary parts of the game
     private BlackJackHand playerHand;
     private BlackJackHand dealerHand;
-    
+    private Scanner scanner = new Scanner(System.in);
+
     // Game variables
     boolean playerTurn;
     
@@ -27,22 +28,22 @@ public class BlackJack extends Game {
     public void newGame() {
         GameTools.clearConsole();
         System.out.print("Starting a new game of BlackJack");
-        GameTools.wait(2000, true);
+        GameTools.wait(1250, true);
         super.deck.initializeDeck();
         System.out.print("Shuffling the deck");
-        GameTools.wait(2000, true);
+        GameTools.wait(1250, true);
         super.deck.shuffle();
         this.playerHand.clear();
         this.dealerHand.clear();
-        this.dealInitialCards();
         super.gameActive = true;
+        this.dealInitialCards();
         this.playerTurn = true;
         this.play();
     }
 
     private void dealInitialCards() {
         System.out.print("Dealing initial cards");
-        GameTools.wait(2000, true);
+        GameTools.wait(1250, true);
         // Deal two cards to the player and dealer
         for (int i = 0; i < 2; i++) {
             this.playerHand.addCard(super.deck.dealCard());
@@ -51,19 +52,28 @@ public class BlackJack extends Game {
         GameTools.wait(1000);
         // Check for blackjack
         if (this.playerHand.getHandValue() == BLACKJACK && this.dealerHand.getHandValue() == BLACKJACK) {
-            System.out.println("Both player and dealer have blackjack! That's crazy! It's a tie!");
-            this.showHands();
+            GameTools.clearConsole();
             gameActive = false;
+            this.showHands();
+            System.out.println("Both player and dealer have blackjack! What are the odds?!");
+            GameTools.wait(4000, true);
+            determineWinner();
         } 
         else if (this.playerHand.getHandValue() == BLACKJACK) {
-            System.out.println("Player has a blackjack! That's amazing! Player wins!");
-            this.showHands();
+            GameTools.clearConsole();
             gameActive = false;
+            this.showHands();
+            System.out.println("Player has a blackjack! That's amazing!");
+            GameTools.wait(4000, true);
+            determineWinner();
         } 
         else if (this.dealerHand.getHandValue() == BLACKJACK) {
-            System.out.println("Dealer has a blackjack! Sucks to be you! Dealer wins!");
-            this.showHands();
+            GameTools.clearConsole();
             gameActive = false;
+            this.showHands();
+            System.out.println("Dealer has a blackjack! Sucks to be you!");
+            GameTools.wait(4000, true);
+            determineWinner();
         }
         // Hide dealer's first card
         this.dealerHand.flipCard(0);
@@ -78,10 +88,10 @@ public class BlackJack extends Game {
 
     @Override
     public void play() {
-        GameTools.clearConsole();
-        Scanner scanner = new Scanner(System.in);
+        
 
         while(gameActive){
+            GameTools.clearConsole();
             if(playerTurn){
                 this.showHands();
                 System.out.println("Player's turn. Choose an action: (h)it, (s)tand");
@@ -104,8 +114,6 @@ public class BlackJack extends Game {
                 else if(action.equals("s")){
                     playerTurn = false;
                 }
-                // Clear the console after player's turn
-                GameTools.clearConsole();
             }
             else{
                 dealerTurn();
@@ -116,15 +124,15 @@ public class BlackJack extends Game {
     }
 
     private void dealerTurn() {
+        this.dealerHand.flipCard(0);
         while(this.dealerHand.getHandValue() < DEALER_STAND){
             GameTools.clearConsole();
-            System.out.print("Dealer's turn. Must hit until reaching " + DEALER_STAND);
+            System.out.println("Dealer's turn. Must hit until reaching " + DEALER_STAND);
             // Wait for a moment before dealer's turn
-            GameTools.wait(1500, true);
             this.dealerHand.addCard(super.deck.dealCard());
             this.showHands();
             // Give the player a moment to see the dealer's hand
-            GameTools.wait(1000);
+            GameTools.wait(2000);
         }
         determineWinner();
     }
@@ -148,10 +156,9 @@ public class BlackJack extends Game {
         }
         GameTools.wait(1000);
         System.out.println("Final Hands:");
-        this.dealerHand.flipCard(0);
         this.showHands();
         super.gameActive = false;
         System.out.print("Ending game");
-        GameTools.wait(2000, true);
+        GameTools.wait(3000, true);
     }
 }
