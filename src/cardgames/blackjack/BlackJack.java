@@ -119,9 +119,12 @@ public class BlackJack extends Game {
     }
 
     private void dealerTurn() {
-        this.dealerHand.flipCard(0);
+        // Force flip dealer's hand
+        this.dealerHand.setCardsFaceDown(false);
+
         GameTools.clearConsole();
-        System.out.print("Dealer's turn. Must hit until reaching " + DEALER_STAND);
+        System.out.println("Dealer's turn. Must hit until reaching " + DEALER_STAND);
+        this.showHands();
         GameTools.wait(2000, true);
         while(this.dealerHand.getHandValue() < DEALER_STAND){
             GameTools.clearConsole();
@@ -134,6 +137,9 @@ public class BlackJack extends Game {
         determineWinner();
     }
     private void determineWinner() {
+        // Force flip dealer's hand
+        this.dealerHand.setCardsFaceDown(false);
+
         int playerValue = this.playerHand.getHandValue();
         int dealerValue = this.dealerHand.getHandValue();
 
@@ -158,7 +164,11 @@ public class BlackJack extends Game {
         System.out.println("Final Hands:");
         this.showHands();
         super.gameActive = false;
-        System.out.print("Ending game");
-        GameTools.wait(3000, true);
+        System.out.println("\nPress Enter to continue.");
+        // Clear previous line leftovers if any
+        while (scanner.hasNextLine()) {
+            scanner.nextLine(); // Clear the input
+            break;
+        }
     }
 }

@@ -2,7 +2,7 @@ package cardgames.common;
 import java.util.Vector;
 
 public class Hand {
-    public Vector<Card> cards;
+    protected Vector<Card> cards;
 
     public Hand() {
         this.cards = new Vector<>();
@@ -28,6 +28,13 @@ public class Hand {
     // Force flip
     public void flipCard(int index, boolean isFaceDown){
         this.cards.get(index).setFaceDown(isFaceDown);
+    }
+
+    // Force hand flip
+    public void setCardsFaceDown(boolean isFaceDown){
+        for(Card card : this.cards){
+            card.setFaceDown(isFaceDown);
+        }
     }
 
     public void showHand() {
