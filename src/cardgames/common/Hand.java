@@ -2,7 +2,7 @@ package cardgames.common;
 import java.util.Vector;
 
 public class Hand {
-    protected Vector<Card> cards;
+    private Vector<Card> cards;
 
     public Hand() {
         this.cards = new Vector<>();
@@ -12,9 +12,13 @@ public class Hand {
         this.cards.add(card);
     }
 
+    public Card[] getCards() {
+        return this.cards.toArray(new Card[0]);
+    }
+
     public Card[] clear() {
         // Fix: Use the overloaded toArray method to ensure the correct type
-        Card[] removed_cards = this.cards.toArray(new Card[0]);
+        Card[] removed_cards = this.getCards();
         this.cards.clear();
         return removed_cards;
     }

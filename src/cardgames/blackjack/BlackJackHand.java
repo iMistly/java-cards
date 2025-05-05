@@ -3,27 +3,15 @@ import cardgames.common.Hand;
 import cardgames.common.Card;
 
 class BlackJackHand extends Hand{
-    public int MAX_HAND_SIZE = 11;
-
     public BlackJackHand() {
         super();
-    }
-    
-    @Override
-    public void addCard(Card card) {
-        if (super.cards.size() < MAX_HAND_SIZE){
-            super.cards.add(card);
-        }
-        else{
-            System.out.println("Cannot add more cards to the hand.");
-        }
     }
 
     public int getHandValue() {
         int value = 0;
         int aceCount = 0;
 
-        for(Card card : cards) {
+        for(Card card : super.getCards()) {
             if(card.isFaceDown()){continue;}
             String rank = card.getRank();
             if(rank.equals("A")) {
